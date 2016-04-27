@@ -33,7 +33,7 @@ public class GithubFragment extends BaseFragment {
     binding = FragmentGithubBinding.inflate(inflater, container, false);
     binding.setGithubModel(githubViewModel);
     reposAdapter.fakeData(11);
-    reposAdapter.setOnItemClickListener((view, item) -> Toast.makeText(getContext(), item, Toast.LENGTH_SHORT).show());
+    reposAdapter.setOnItemClickListener((view, item) -> Toast.makeText(getContext(), item.toString(), Toast.LENGTH_SHORT).show());
     binding.githubReycler.setAdapter(reposAdapter);
     binding.githubReycler.addItemDecoration(new DividerItemDecoration(getActivity()));
     binding.githubReycler.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -9,6 +9,7 @@ import es.amarinag.mvvm_databinging_dagger2.databinding.ActivityMainBinding;
 import es.amarinag.mvvm_databinging_dagger2.di.component.DaggerMainComponent;
 import es.amarinag.mvvm_databinging_dagger2.di.component.MainComponent;
 import es.amarinag.mvvm_databinging_dagger2.di.module.MainModule;
+import es.amarinag.mvvm_databinging_dagger2.ui.fragment.GithubFragment;
 
 public class MainActivity extends AppCompatActivity {
   MainComponent component;
@@ -19,10 +20,16 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
     injectModule();
+    getSupportFragmentManager().beginTransaction().replace(R.id.main_content, new GithubFragment()).commit();
   }
 
   private void injectModule() {
     component = DaggerMainComponent.builder().applicationComponent(App.get(this).getComponent()).mainModule(new MainModule(this)).build();
     component.inject(this);
   }
+
+  public MainComponent getComponent() {
+    return component;
+  }
+
 }

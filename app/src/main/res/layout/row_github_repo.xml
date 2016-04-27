@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android">
-
+  <data>
+    <variable name="repositoryViewModel"
+        type="es.amarinag.mvvm_databinging_dagger2.ui.viewmodel.GithubRowViewModel"/>
+  </data>
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="?attr/listPreferredItemHeight"
-      android:clickable="true">
+      android:clickable="true"
+      android:onClick="@{repositoryViewModel.onClickRepository}">
     <TextView
         android:id="@+id/row_repo_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hola"/>
+        android:text="@{repositoryViewModel.repository.name}"/>
   </RelativeLayout>
 </layout>

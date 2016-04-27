@@ -7,6 +7,7 @@ import es.amarinag.mvvm_databinging_dagger2.R;
 import es.amarinag.mvvm_databinging_dagger2.databinding.RowGithubRepoBinding;
 import es.amarinag.mvvm_databinging_dagger2.di.ForActivity;
 import es.amarinag.mvvm_databinging_dagger2.model.GithubRepository;
+import es.amarinag.mvvm_databinging_dagger2.ui.viewmodel.GithubRowViewModel;
 import es.amarinag.mvvm_databinging_dagger2.ui.widget.ArrayRecyclerAdapter;
 import es.amarinag.mvvm_databinging_dagger2.ui.widget.BindingHolder;
 import javax.inject.Inject;
@@ -29,8 +30,7 @@ public class ReposAdapter extends
   @Override public void onBindViewHolder(BindingHolder<RowGithubRepoBinding> holder, int position) {
     GithubRepository githubRepository = getItem(position);
     RowGithubRepoBinding row = holder.binding;
-    row.rowRepoName.setText(githubRepository.getName());
-    row.getRoot().setOnClickListener(v -> dispatchOnItemClick(v.getRootView(), githubRepository));
+    row.setRepositoryViewModel(new GithubRowViewModel(githubRepository));
   }
 
   public void fakeData(int total) {

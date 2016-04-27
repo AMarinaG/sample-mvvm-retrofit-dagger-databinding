@@ -13,7 +13,7 @@ public class App extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
-    Log.i(getClass().getSimpleName(), "start App");
+    Log.i(getClass().getSimpleName(), "c[_]");
     applicationComponent = createComponent();
   }
 

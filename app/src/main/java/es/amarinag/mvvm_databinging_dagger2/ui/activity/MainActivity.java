@@ -1,7 +1,7 @@
 package es.amarinag.mvvm_databinging_dagger2.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import es.amarinag.mvvm_databinging_dagger2.App;
 import es.amarinag.mvvm_databinging_dagger2.R;
 import es.amarinag.mvvm_databinging_dagger2.di.component.DaggerMainComponent;

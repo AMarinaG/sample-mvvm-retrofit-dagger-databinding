@@ -4,7 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 /**
- * Created by alcorce on 27/04/2016.
+ * Created by AMarinaG on 27/04/2016.
  */
 public class App extends Application {
   @Override

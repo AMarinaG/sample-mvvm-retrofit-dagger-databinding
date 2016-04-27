@@ -11,12 +11,16 @@ import es.amarinag.mvvm_databinging_dagger2.ui.viewmodel.GithubRowViewModel;
 import es.amarinag.mvvm_databinging_dagger2.ui.widget.ArrayRecyclerAdapter;
 import es.amarinag.mvvm_databinging_dagger2.ui.widget.BindingHolder;
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 /**
  * Created by AMarinaG on 27/04/2016.
  */
 public class ReposAdapter extends
     ArrayRecyclerAdapter<GithubRepository, BindingHolder<RowGithubRepoBinding>> {
+  @Inject
+  @ForActivity
+  Provider<GithubRowViewModel> githubRowViewModelProvider;
   @Inject
   public ReposAdapter(@NonNull @ForActivity Context context) {
     super(context);
@@ -30,7 +34,9 @@ public class ReposAdapter extends
   @Override public void onBindViewHolder(BindingHolder<RowGithubRepoBinding> holder, int position) {
     GithubRepository githubRepository = getItem(position);
     RowGithubRepoBinding row = holder.binding;
-    row.setRepositoryViewModel(new GithubRowViewModel(githubRepository));
+    GithubRowViewModel githubRowViewModel = githubRowViewModelProvider.get();
+    githubRowViewModel.bindRepo(githubRepository);
+    row.setRepositoryViewModel(githubRowViewModel);
   }
 
   public void fakeData(int total) {

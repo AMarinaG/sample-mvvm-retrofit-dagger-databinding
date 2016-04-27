@@ -1,16 +1,12 @@
 package es.amarinag.mvvm_databinging_dagger2.ui.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import es.amarinag.mvvm_databinging_dagger2.databinding.FragmentGithubBinding;
-import es.amarinag.mvvm_databinging_dagger2.di.ForActivity;
-import es.amarinag.mvvm_databinging_dagger2.di.ForApplication;
+import es.amarinag.mvvm_databinging_dagger2.ui.viewmodel.GithubViewModel;
 import javax.inject.Inject;
 
 /**
@@ -18,6 +14,8 @@ import javax.inject.Inject;
  */
 public class GithubFragment extends BaseFragment {
   private FragmentGithubBinding binding;
+  @Inject
+  GithubViewModel githubViewModel;
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
@@ -27,6 +25,7 @@ public class GithubFragment extends BaseFragment {
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     binding = FragmentGithubBinding.inflate(inflater, container, false);
+    binding.setGithubModel(githubViewModel);
     //storeAdapter = new StoreAdapter(getActivity());
     //binding.storeRecycler.setAdapter(storeAdapter);
     //binding.storeRecycler.addItemDecoration(new DividerItemDecoration(getActivity()));

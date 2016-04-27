@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: "me.tatarka.retrolambda"
+apply plugin: "com.neenbedankt.android-apt"
 
 android {
   compileSdkVersion 23
@@ -12,10 +14,36 @@ android {
     versionName "1.0"
   }
   buildTypes {
+    all {
+      buildConfigField 'String', 'API_ENDPOINT_LOCAL', "\"https://api.github.com/\""
+    }
+    debug {
+      def host = InetAddress.getLocalHost().getCanonicalHostName()
+      buildConfigField "String", "LOCAL_IP", '\"' + host + '\"'
+    }
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      apply plugin: "signing"
+
+      shrinkResources true
+      minifyEnabled true
+
+      signingConfig signingConfigs.debug
     }
+  }
+  productFlavors {
+    internal {
+      applicationId 'es.amarinag.mvvm_databinging_dagger2.internal'
+    }
+    production {
+      applicationId 'es.amarinag.mvvm_databinging_dagger2'
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
   }
 }
 

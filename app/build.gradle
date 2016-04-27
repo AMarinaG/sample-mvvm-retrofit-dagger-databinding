@@ -52,6 +52,8 @@ android {
 
 dependencies {
   compile 'com.android.support:appcompat-v7:23.3.0'
+  compile 'com.android.support:recyclerview-v7:23.3.0'
+
   provided 'org.glassfish:javax.annotation:10.0-b28'
   compile 'com.google.dagger:dagger:2.2'
   apt 'com.google.dagger:dagger-compiler:2.2'

@@ -16,15 +16,14 @@ import rx.schedulers.Schedulers;
  * Created by AMarinaG on 28/04/2016.
  */
 public abstract class BaseUseCase {
-  //si queremos el executor, implementar
   protected Executor executor;
 
-  public BaseUseCase() {
-    //this.executor = executor;
+  public BaseUseCase(Executor executor) {
+    this.executor = executor;
   }
 
   public <T> Observable.Transformer<T, T> applySchedulers() {
-    return observable -> observable.subscribeOn(Schedulers.io())
+    return observable -> observable.subscribeOn(Schedulers.from(executor))
         .observeOn(AndroidSchedulers.mainThread());
   }
   @NonNull

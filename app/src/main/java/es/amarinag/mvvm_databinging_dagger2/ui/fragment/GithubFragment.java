@@ -35,7 +35,9 @@ public class GithubFragment extends BaseFragment {
     binding.githubReycler.setAdapter(githubViewModel.getReposAdapter());
     binding.githubReycler.addItemDecoration(new DividerItemDecoration(getActivity()));
     binding.githubReycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-    githubViewModel.loadData();
+    for (int i = 0; i<100;i++){
+      githubViewModel.loadData();
+    }
     return binding.getRoot();
   }
 

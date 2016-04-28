@@ -8,6 +8,7 @@ import es.amarinag.mvvm_databinging_dagger2.App;
 import es.amarinag.mvvm_databinging_dagger2.di.ForApplication;
 import es.amarinag.mvvm_databinging_dagger2.di.module.AndroidModule;
 import es.amarinag.mvvm_databinging_dagger2.di.module.ApplicationModule;
+import es.amarinag.mvvm_databinging_dagger2.domain.executor.ThreadExecutor;
 import es.amarinag.mvvm_databinging_dagger2.network.NetworkModule;
 import es.amarinag.mvvm_databinging_dagger2.network.OkHttpInterceptorsModule;
 import es.amarinag.mvvm_databinging_dagger2.util.GsonModule;
@@ -28,6 +29,7 @@ import retrofit2.Retrofit;
 public interface ApplicationComponent {
   @ForApplication Context provideContext();
 
+  ThreadExecutor provideThreadExecutor();
   LayoutInflater provideLayoutInflater();
   Retrofit provideRetrofit();
   Gson provideGson();

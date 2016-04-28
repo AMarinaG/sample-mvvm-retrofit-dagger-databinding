@@ -3,7 +3,9 @@ package es.amarinag.mvvm_databinging_dagger2;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
+import com.facebook.stetho.Stetho;
 import es.amarinag.mvvm_databinging_dagger2.di.component.ApplicationComponent;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by AMarinaG on 27/04/2016.
@@ -15,6 +17,7 @@ public class App extends Application {
     super.onCreate();
     Log.i(getClass().getSimpleName(), "c[_]");
     applicationComponent = createComponent();
+    Stetho.initializeWithDefaults(this);
   }
 
   private ApplicationComponent createComponent() {

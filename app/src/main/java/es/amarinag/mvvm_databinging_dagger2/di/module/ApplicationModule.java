@@ -6,6 +6,8 @@ import dagger.Module;
 import dagger.Provides;
 import es.amarinag.mvvm_databinging_dagger2.App;
 import es.amarinag.mvvm_databinging_dagger2.di.ForApplication;
+import es.amarinag.mvvm_databinging_dagger2.domain.executor.JobExecutor;
+import es.amarinag.mvvm_databinging_dagger2.domain.executor.ThreadExecutor;
 import javax.inject.Singleton;
 
 /**
@@ -18,6 +20,7 @@ public class ApplicationModule {
   public ApplicationModule(App application) {
     this.application = application;
   }
+
   @ForApplication
   @Provides
   @Singleton
@@ -37,5 +40,11 @@ public class ApplicationModule {
   @Singleton
   public Context provideContext() {
     return application.getApplicationContext();
+  }
+
+  @Provides
+  @Singleton
+  public ThreadExecutor provideThreadExecutor() {
+    return new JobExecutor();
   }
 }

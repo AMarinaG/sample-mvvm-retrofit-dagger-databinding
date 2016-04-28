@@ -5,6 +5,7 @@ package es.amarinag.mvvm_databinging_dagger2.model;
  */
 public class Repository {
   private String name;
+  private Owner owner;
 
   public String getName() {
     return name;
@@ -14,9 +15,18 @@ public class Repository {
     this.name = name;
   }
 
+  public Owner getOwner() {
+    return owner;
+  }
+
+  public void setOwner(Owner owner) {
+    this.owner = owner;
+  }
+
   @Override public String toString() {
     return "{\"Repository\":{"
         + "\"name\":\"" + name + "\""
+        + ", \"owner\":" + owner
         + "}}";
   }
 }

@@ -1,9 +1,11 @@
 package es.amarinag.mvvm_databinging_dagger2.ui.viewmodel;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import es.amarinag.mvvm_databinging_dagger2.di.ForActivity;
 import es.amarinag.mvvm_databinging_dagger2.domain.repository.GithubRepository;
+import es.amarinag.mvvm_databinging_dagger2.domain.usecase.BaseUseCase;
 import es.amarinag.mvvm_databinging_dagger2.domain.usecase.LoadRepositoriesUseCase;
 import es.amarinag.mvvm_databinging_dagger2.model.Repository;
 import es.amarinag.mvvm_databinging_dagger2.ui.adapter.ReposAdapter;
@@ -34,6 +36,6 @@ public class GithubViewModel {
   public void loadData() {
     Observable<List<Repository>> listObservable = loadRepositoriesUseCase.invoke();
     listObservable
-        .subscribe(repositories -> reposAdapter.reset(repositories));
+        .subscribe(repositories -> reposAdapter.reset(repositories),throwable -> Log.e("C[_]", throwable.getMessage(), throwable));
   }
 }

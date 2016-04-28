@@ -14,6 +14,14 @@
         android:id="@+id/row_repo_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@android:style/TextAppearance.DeviceDefault.Medium"
         android:text="@{repositoryViewModel.repository.name}"/>
+    <TextView
+        android:id="@+id/row_repo_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@android:style/TextAppearance.DeviceDefault.Small"
+        android:layout_below="@id/row_repo_name"
+        android:text="@{repositoryViewModel.repository.owner.login}"/>
   </RelativeLayout>
 </layout>

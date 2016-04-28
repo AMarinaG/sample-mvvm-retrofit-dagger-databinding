@@ -26,4 +26,10 @@ public class GithubRepository {
         .map(RepositoryMapper::wrap)
         .toList();
   }
+
+  public Observable<Repository> getDeatilRepository(String owner, String repository) {
+    Observable<RepositoryEntity> repositoryEntityObservable = githubRemoteRepository.getDetailRepository(owner, repository);
+    return repositoryEntityObservable
+        .map(RepositoryMapper::wrap);
+  }
 }

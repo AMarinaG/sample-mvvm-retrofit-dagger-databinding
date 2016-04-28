@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
   <data>
+    <import type="android.view.View"/>
     <variable name="repositoryDetailViewModel"
         type="es.amarinag.mvvm_databinging_dagger2.ui.viewmodel.RepositoryDetailViewModel"/>
   </data>
@@ -24,5 +25,19 @@
         tools:text="Owner detail Fragment"
         android:layout_below="@id/repo_detail_name"
         android:layout_centerHorizontal="true"/>
+    <RelativeLayout
+        android:id="@+id/repo_detail_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="@color/colorPrimary"
+        android:visibility="@{repositoryDetailViewModel.showLoading ? View.VISIBLE : View.GONE}">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:text='@{repositoryDetailViewModel.showLoading ? "true":"false"}'/>
+    </RelativeLayout>
+
   </RelativeLayout>
 </layout>

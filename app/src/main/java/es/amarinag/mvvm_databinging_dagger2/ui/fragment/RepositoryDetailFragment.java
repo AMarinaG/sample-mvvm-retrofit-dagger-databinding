@@ -14,6 +14,8 @@ import javax.inject.Inject;
  * Created by AMarinaG on 28/04/2016.
  */
 public class RepositoryDetailFragment extends BaseFragment {
+  public static final String ARG_REPOSITORY = "ARG_REPOSITORY";
+  public static final String ARG_OWNER = "ARG_OWNER";
   private FragmentRepositoryDetailBinding binding;
 
   @Inject
@@ -24,8 +26,8 @@ public class RepositoryDetailFragment extends BaseFragment {
     Log.wtf(TAG, "Hemos salido en pausa!!!!");
     if(null!=getArguments())
     repositoryDetailViewModel.refreshData(
-        getArguments().getString("ARG_OWNER", "pepe"),
-        getArguments().getString("ARG_REPOSITORY", "pepe Repo")
+        getArguments().getString(ARG_OWNER, "pepe"),
+        getArguments().getString(ARG_REPOSITORY, "pepe Repo")
     );
   }
 

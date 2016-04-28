@@ -21,4 +21,8 @@ public class GithubRemoteRepository {
   public Observable<List<RepositoryEntity>> getAllRepositories(){
     return githubService.getAllRepositories();
   }
+
+  public Observable<RepositoryEntity> getDetailRepository(String owner, String repository) {
+    return githubService.getDetailRepository(owner, repository);
+  }
 }

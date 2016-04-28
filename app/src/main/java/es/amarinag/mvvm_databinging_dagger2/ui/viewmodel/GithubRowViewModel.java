@@ -2,11 +2,9 @@ package es.amarinag.mvvm_databinging_dagger2.ui.viewmodel;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-import es.amarinag.mvvm_databinging_dagger2.R;
 import es.amarinag.mvvm_databinging_dagger2.di.ForActivity;
 import es.amarinag.mvvm_databinging_dagger2.model.Repository;
 import es.amarinag.mvvm_databinging_dagger2.ui.fragment.RepositoryDetailFragment;
@@ -39,6 +37,9 @@ public class GithubRowViewModel extends BaseObservable {
 
   public void onClickRepository(View view) {
     Toast.makeText(view.getContext(), repository.getName(), Toast.LENGTH_SHORT).show();
-    navigation.showFragment(new RepositoryDetailFragment());
+    Bundle args = new Bundle();
+    args.putString(RepositoryDetailFragment.ARG_REPOSITORY, repository.getName());
+    args.putString(RepositoryDetailFragment.ARG_OWNER, repository.getOwner().getLogin());
+    navigation.showFragment(new RepositoryDetailFragment(), args);
   }
 }

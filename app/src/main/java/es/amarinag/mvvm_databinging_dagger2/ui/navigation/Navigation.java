@@ -1,5 +1,6 @@
 package es.amarinag.mvvm_databinging_dagger2.ui.navigation;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import es.amarinag.mvvm_databinging_dagger2.BuildConfig;
@@ -28,6 +29,14 @@ public class Navigation {
   }
 
   public void showFragment(Fragment fragment) {
+    fragmentManager.beginTransaction()
+        .replace(R.id.main_content, fragment, fragment.getClass().getSimpleName())
+        .addToBackStack(BuildConfig.APPLICATION_ID)
+        .commit();
+  }
+
+  public void showFragment(Fragment fragment, Bundle args) {
+    fragment.setArguments(args);
     fragmentManager.beginTransaction()
         .replace(R.id.main_content, fragment, fragment.getClass().getSimpleName())
         .addToBackStack(BuildConfig.APPLICATION_ID)

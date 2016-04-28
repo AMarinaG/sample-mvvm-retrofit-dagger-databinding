@@ -25,29 +25,18 @@ public class GithubFragment extends BaseFragment {
   private FragmentGithubBinding binding;
   @Inject
   GithubViewModel githubViewModel;
-  @Inject
-  ReposAdapter reposAdapter;
-  @Inject
-  GithubRepository githubRepository;
+
 
   @Nullable @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     binding = FragmentGithubBinding.inflate(inflater, container, false);
     binding.setGithubModel(githubViewModel);
-    binding.githubReycler.setAdapter(reposAdapter);
+    binding.githubReycler.setAdapter(githubViewModel.getReposAdapter());
     binding.githubReycler.addItemDecoration(new DividerItemDecoration(getActivity()));
     binding.githubReycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-    loadData();
+    githubViewModel.loadData();
     return binding.getRoot();
-  }
-
-  private void loadData() {
-    Observable<List<Repository>> listObservable = githubRepository.getAllRepositories();
-    listObservable
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
-        .subscribe(repositories -> reposAdapter.reset(repositories));
   }
 
   @Override protected void inject() {

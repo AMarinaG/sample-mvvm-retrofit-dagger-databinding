@@ -10,6 +10,7 @@ import es.amarinag.mvvm_databinging_dagger2.R;
 import es.amarinag.mvvm_databinging_dagger2.di.ForActivity;
 import es.amarinag.mvvm_databinging_dagger2.model.Repository;
 import es.amarinag.mvvm_databinging_dagger2.ui.fragment.RepositoryDetailFragment;
+import es.amarinag.mvvm_databinging_dagger2.ui.navigation.Navigation;
 import javax.inject.Inject;
 
 /**
@@ -22,8 +23,7 @@ public class GithubRowViewModel extends BaseObservable {
   @ForActivity
   Context context;
   @Inject
-  @ForActivity
-  FragmentManager fragmentManager;
+  Navigation navigation;
 
   @Inject
   public GithubRowViewModel() {
@@ -39,8 +39,6 @@ public class GithubRowViewModel extends BaseObservable {
 
   public void onClickRepository(View view) {
     Toast.makeText(view.getContext(), repository.getName(), Toast.LENGTH_SHORT).show();
-    fragmentManager.beginTransaction()
-        .replace(R.id.main_content, new RepositoryDetailFragment(), "RepositoryDetailFragment")
-        .commit();
+    navigation.showFragment(new RepositoryDetailFragment());
   }
 }

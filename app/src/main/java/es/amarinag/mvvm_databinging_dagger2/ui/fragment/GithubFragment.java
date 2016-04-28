@@ -6,12 +6,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import es.amarinag.mvvm_databinging_dagger2.databinding.FragmentGithubBinding;
+import es.amarinag.mvvm_databinging_dagger2.domain.repository.GithubRepository;
+import es.amarinag.mvvm_databinging_dagger2.model.Repository;
 import es.amarinag.mvvm_databinging_dagger2.ui.adapter.ReposAdapter;
 import es.amarinag.mvvm_databinging_dagger2.ui.viewmodel.GithubViewModel;
 import es.amarinag.mvvm_databinging_dagger2.ui.widget.itemdecorator.DividerItemDecoration;
+import java.util.List;
 import javax.inject.Inject;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by AMarinaG on 27/04/2016.
@@ -22,19 +27,27 @@ public class GithubFragment extends BaseFragment {
   GithubViewModel githubViewModel;
   @Inject
   ReposAdapter reposAdapter;
+  @Inject
+  GithubRepository githubRepository;
 
   @Nullable @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     binding = FragmentGithubBinding.inflate(inflater, container, false);
     binding.setGithubModel(githubViewModel);
-    reposAdapter.fakeData(11);
     binding.githubReycler.setAdapter(reposAdapter);
     binding.githubReycler.addItemDecoration(new DividerItemDecoration(getActivity()));
     binding.githubReycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-    //storeAdapter.setOnItemClickListener((view, item) -> Snackbar.make(binding.getRoot(), item.toString(), Snackbar.LENGTH_SHORT).show());
-    //loadData();
+    loadData();
     return binding.getRoot();
+  }
+
+  private void loadData() {
+    Observable<List<Repository>> listObservable = githubRepository.getAllRepositories();
+    listObservable
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .subscribe(repositories -> reposAdapter.reset(repositories));
   }
 
   @Override protected void inject() {

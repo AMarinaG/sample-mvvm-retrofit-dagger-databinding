@@ -1,22 +1,20 @@
 package es.amarinag.mvvm_databinging_dagger2.domain.entity.mapper;
 
-import es.amarinag.mvvm_databinging_dagger2.domain.entity.OwnerEntity;
 import es.amarinag.mvvm_databinging_dagger2.domain.entity.RepositoryEntity;
-import es.amarinag.mvvm_databinging_dagger2.model.GithubOwner;
-import es.amarinag.mvvm_databinging_dagger2.model.GithubRepository;
+import es.amarinag.mvvm_databinging_dagger2.model.Repository;
 
 /**
  * Created by AMarinaG on 28/04/2016.
  */
 public class RepositoryMapper {
-  public static GithubRepository wrap(RepositoryEntity repositoryEntity) {
-    GithubRepository repository = new GithubRepository();
+  public static Repository wrap(RepositoryEntity repositoryEntity) {
+    Repository repository = new Repository();
     repository.setName(repositoryEntity.getName());
     return repository;
   }
-  public static RepositoryEntity unwrap(GithubRepository githubRepository) {
+  public static RepositoryEntity unwrap(Repository repository) {
     RepositoryEntity repositoryEntity = new RepositoryEntity();
-    repositoryEntity.setName(githubRepository.getName());
+    repositoryEntity.setName(repository.getName());
     return repositoryEntity;
   }
 }

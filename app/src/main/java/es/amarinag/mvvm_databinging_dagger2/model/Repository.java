@@ -3,7 +3,7 @@ package es.amarinag.mvvm_databinging_dagger2.model;
 /**
  * Created by AMarinaG on 27/04/2016.
  */
-public class GithubRepository {
+public class Repository {
   private String name;
 
   public String getName() {
@@ -15,7 +15,7 @@ public class GithubRepository {
   }
 
   @Override public String toString() {
-    return "{\"GithubRepository\":{"
+    return "{\"Repository\":{"
         + "\"name\":\"" + name + "\""
         + "}}";
   }

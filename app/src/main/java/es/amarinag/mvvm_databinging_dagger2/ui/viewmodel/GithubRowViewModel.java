@@ -6,14 +6,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import es.amarinag.mvvm_databinging_dagger2.di.ForActivity;
-import es.amarinag.mvvm_databinging_dagger2.model.GithubRepository;
+import es.amarinag.mvvm_databinging_dagger2.model.Repository;
 import javax.inject.Inject;
 
 /**
  * Created by AMarinaG on 27/04/2016.
  */
 public class GithubRowViewModel extends BaseObservable {
-  private GithubRepository repository;
+  private Repository repository;
 
   @Inject
   @ForActivity
@@ -22,10 +22,10 @@ public class GithubRowViewModel extends BaseObservable {
   public GithubRowViewModel() {
   }
 
-  public void bindRepo(GithubRepository repository){
+  public void bindRepo(Repository repository){
     this.repository=repository;
   }
-  public GithubRepository getRepository() {
+  public Repository getRepository() {
     return repository;
   }
 

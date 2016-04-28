@@ -1,6 +1,7 @@
 package es.amarinag.mvvm_databinging_dagger2.di.component;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import com.google.gson.Gson;
 import dagger.Component;

@@ -1,6 +1,7 @@
 package es.amarinag.mvvm_databinging_dagger2.di.module;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import dagger.Module;
 import dagger.Provides;
 import es.amarinag.mvvm_databinging_dagger2.di.ForActivity;
@@ -22,8 +23,14 @@ public class MainModule {
   protected MainActivity activity() {
     return activity;
   }
+
   @ForActivity
-  @Provides Context provideContext(){
+  @Provides Context provideContext() {
     return activity;
+  }
+
+  @ForActivity
+  @Provides FragmentManager provideFragmentManager(MainActivity activity) {
+    return activity.getSupportFragmentManager();
   }
 }

@@ -6,6 +6,13 @@ package es.amarinag.mvvm_databinging_dagger2.model;
 public class Owner {
   private String login;
 
+  public Owner() {
+  }
+
+  public Owner(String owner) {
+    login=owner;
+  }
+
   public String getLogin() {
     return login;
   }

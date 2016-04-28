@@ -26,7 +26,6 @@ public class GithubFragment extends BaseFragment {
   @Inject
   GithubViewModel githubViewModel;
 
-
   @Nullable @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
@@ -35,9 +34,7 @@ public class GithubFragment extends BaseFragment {
     binding.githubReycler.setAdapter(githubViewModel.getReposAdapter());
     binding.githubReycler.addItemDecoration(new DividerItemDecoration(getActivity()));
     binding.githubReycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-    for (int i = 0; i<100;i++){
-      githubViewModel.loadData();
-    }
+    githubViewModel.loadData();
     return binding.getRoot();
   }
 

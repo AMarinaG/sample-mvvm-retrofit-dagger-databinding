@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.Toast;
 import es.amarinag.mvvm_databinging_dagger2.di.ForActivity;
 import es.amarinag.mvvm_databinging_dagger2.domain.repository.GithubRepository;
+import es.amarinag.mvvm_databinging_dagger2.domain.usecase.LoadRepositoriesUseCase;
 import es.amarinag.mvvm_databinging_dagger2.model.Repository;
 import es.amarinag.mvvm_databinging_dagger2.ui.adapter.ReposAdapter;
 import java.util.List;
@@ -19,7 +20,7 @@ public class GithubViewModel {
   @Inject
   ReposAdapter reposAdapter;
   @Inject
-  GithubRepository githubRepository;
+  LoadRepositoriesUseCase loadRepositoriesUseCase;
 
   @Inject
   @ForActivity
@@ -31,10 +32,8 @@ public class GithubViewModel {
   }
 
   public void loadData() {
-    Observable<List<Repository>> listObservable = githubRepository.getAllRepositories();
+    Observable<List<Repository>> listObservable = loadRepositoriesUseCase.invoke();
     listObservable
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
         .subscribe(repositories -> reposAdapter.reset(repositories));
   }
 }

@@ -31,7 +31,8 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:background="@color/colorPrimary"
-        android:visibility="@{repositoryDetailViewModel.showLoading ? View.VISIBLE : View.GONE}">
+        android:visibility="@{repositoryDetailViewModel.showLoading ? View.VISIBLE : View.GONE}"
+        tools:visibilty="gone">
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"

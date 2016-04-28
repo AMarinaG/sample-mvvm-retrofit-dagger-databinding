@@ -14,6 +14,7 @@ import rx.Observable;
 public class LoadRepositoriesUseCase extends BaseUseCase{
   @Inject
   GithubRepository githubRepository;
+
   @Inject
   public LoadRepositoriesUseCase(ThreadExecutor executor) {
     super(executor);

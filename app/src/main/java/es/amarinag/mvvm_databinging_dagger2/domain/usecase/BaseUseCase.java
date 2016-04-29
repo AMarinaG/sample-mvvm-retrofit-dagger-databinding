@@ -1,7 +1,6 @@
 package es.amarinag.mvvm_databinging_dagger2.domain.usecase;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.concurrent.Executor;
@@ -11,6 +10,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by AMarinaG on 28/04/2016.
@@ -61,10 +61,10 @@ public abstract class BaseUseCase {
   public static Observable<?> getRetryObservable(Observable<? extends Throwable> observable, int count) {
     return observable.zipWith(Observable.range(1, count), (throwable, integer) -> {
       if (integer < count) {
-        Log.e("C[_]",  "error, trying again...", throwable);
+        Timber.e("error, trying again...", throwable);
         return Observable.timer(1, TimeUnit.SECONDS);
       }
-      Log.e("C[_]", "error, finish tries...", throwable);
+      Timber.e("error, finish tries...", throwable);
       return Observable.error(new IllegalStateException());
     });
   }

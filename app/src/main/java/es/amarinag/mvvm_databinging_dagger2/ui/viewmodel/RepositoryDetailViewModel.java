@@ -1,14 +1,13 @@
 package es.amarinag.mvvm_databinging_dagger2.ui.viewmodel;
 
 import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-import android.util.Log;
 import es.amarinag.mvvm_databinging_dagger2.domain.usecase.DetailRepositoryUseCase;
 import es.amarinag.mvvm_databinging_dagger2.model.Repository;
 import javax.inject.Inject;
 import rx.Observable;
+import timber.log.Timber;
 
 /**
  * Created by AMarinaG on 28/04/2016.
@@ -39,10 +38,10 @@ public class RepositoryDetailViewModel extends BaseObservable {
   public void refreshData(String owner, String repository) {
     Observable<Repository> repositoryObservable = detailRepositoryUseCase.invoke(owner, repository);
     repositoryObservable.subscribe(repo -> {
-          Log.wtf("C[_]", "repo: " + repo);
+          Timber.wtf("repo: " + repo);
           setRepository(repo);
           setShowLoading(false);
-        }, throwable -> Log.e("C[_]", throwable.getMessage(), throwable)
+        }, throwable -> Timber.e(throwable.getMessage(), throwable)
     );
   }
 

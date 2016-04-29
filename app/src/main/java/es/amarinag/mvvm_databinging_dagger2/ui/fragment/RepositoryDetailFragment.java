@@ -2,13 +2,13 @@ package es.amarinag.mvvm_databinging_dagger2.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import es.amarinag.mvvm_databinging_dagger2.databinding.FragmentRepositoryDetailBinding;
 import es.amarinag.mvvm_databinging_dagger2.ui.viewmodel.RepositoryDetailViewModel;
 import javax.inject.Inject;
+import timber.log.Timber;
 
 /**
  * Created by AMarinaG on 28/04/2016.
@@ -23,7 +23,7 @@ public class RepositoryDetailFragment extends BaseFragment {
 
   @Override public void onResume() {
     super.onResume();
-    Log.wtf(TAG, "Hemos salido en pausa!!!!");
+    Timber.wtf("Hemos salido en pausa!!!!");
     if(null!=getArguments())
     repositoryDetailViewModel.refreshData(
         getArguments().getString(ARG_OWNER, "pepe"),
@@ -41,7 +41,7 @@ public class RepositoryDetailFragment extends BaseFragment {
 
   @Override public void onPause() {
     super.onPause();
-    Log.wtf(TAG, "Hemos entrado en pausa!!!!");
+    Timber.wtf("Hemos entrado en pausa!!!!");
   }
 
   @Override

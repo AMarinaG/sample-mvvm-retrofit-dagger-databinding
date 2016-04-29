@@ -64,13 +64,12 @@ public class NetworkModule {
   @Provides
   @Singleton
   public Retrofit provideRestAdapter(@NonNull OkHttpClient okHttpClient, @NonNull Gson gson) {
-    Retrofit restAdapter = new Retrofit.Builder()
+    return new Retrofit.Builder()
         .baseUrl(BuildConfig.API_ENDPOINT_LOCAL)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
         .build();
-    return restAdapter;
   }
 
 

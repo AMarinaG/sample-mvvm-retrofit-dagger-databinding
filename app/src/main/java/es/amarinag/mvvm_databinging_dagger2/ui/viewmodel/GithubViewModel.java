@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by AMarinaG on 27/04/2016.
@@ -36,6 +37,6 @@ public class GithubViewModel {
   public void loadData() {
     Observable<List<Repository>> listObservable = loadRepositoriesUseCase.invoke();
     listObservable
-        .subscribe(repositories -> reposAdapter.reset(repositories),throwable -> Log.e("C[_]", throwable.getMessage(), throwable));
+        .subscribe(repositories -> reposAdapter.reset(repositories),throwable -> Timber.e(throwable.getMessage(), throwable));
   }
 }

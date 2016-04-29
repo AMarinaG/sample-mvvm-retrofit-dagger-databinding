@@ -1,6 +1,5 @@
 package es.amarinag.mvvm_databinging_dagger2.domain.executor;
 
-import android.util.Log;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
@@ -12,6 +11,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
+import timber.log.Timber;
 
 /**
  * Created by AMarinaG on 28/04/2016.
@@ -112,10 +112,10 @@ public class JobExecutor implements ThreadExecutor {
     if (awaitTerminationInSeconds > 0) {
       try {
         if (!executor.awaitTermination(awaitTerminationInSeconds, TimeUnit.SECONDS)) {
-          Log.w("AMG9JobExecutor", "Timed out while waiting for executor to terminate");
+          Timber.w("Timed out while waiting for executor to terminate");
         }
       } catch (InterruptedException ex) {
-        Log.w("AMG9JobExecutor", "Interrupted while waiting for executor to terminate");
+        Timber.w("Interrupted while waiting for executor to terminate");
       }
       Thread.currentThread().interrupt();
     }

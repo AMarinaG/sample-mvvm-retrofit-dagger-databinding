@@ -10,7 +10,6 @@ import es.amarinag.mvvm_databinging_dagger2.databinding.ActivityMainBinding;
 import es.amarinag.mvvm_databinging_dagger2.di.component.DaggerMainComponent;
 import es.amarinag.mvvm_databinging_dagger2.di.component.MainComponent;
 import es.amarinag.mvvm_databinging_dagger2.di.module.MainModule;
-import es.amarinag.mvvm_databinging_dagger2.ui.fragment.GithubFragment;
 import es.amarinag.mvvm_databinging_dagger2.ui.navigation.Navigation;
 import javax.inject.Inject;
 

@@ -49,6 +49,11 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
 }
+retrolambda {
+  jdk System.getenv("JAVA8_HOME")
+  oldJdk System.getenv("JAVA_HOME")
+  javaVersion JavaVersion.VERSION_1_6
+}
 
 dependencies {
   compile 'com.android.support:appcompat-v7:23.3.0'

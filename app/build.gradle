@@ -1,26 +1,92 @@
 apply plugin: 'com.android.application'
+apply plugin: "me.tatarka.retrolambda"
+apply plugin: "com.neenbedankt.android-apt"
 
 android {
   compileSdkVersion 23
   buildToolsVersion "23.0.2"
 
+  dataBinding {
+    enabled = true
+  }
   defaultConfig {
     applicationId "es.amarinag.mvvm_databinging_dagger2"
     minSdkVersion 15
     targetSdkVersion 23
     versionCode 1
     versionName "1.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
   buildTypes {
+    all {
+      buildConfigField 'String', 'API_ENDPOINT_LOCAL', "\"https://api.github.com/\""
+    }
+    debug {
+      def host = InetAddress.getLocalHost().getCanonicalHostName()
+      buildConfigField "String", "LOCAL_IP", '\"' + host + '\"'
+    }
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      apply plugin: "signing"
+
+      shrinkResources true
+      minifyEnabled true
+
+      signingConfig signingConfigs.debug
     }
   }
+  productFlavors {
+    internal {
+      applicationId 'es.amarinag.mvvm_databinging_dagger2.internal'
+    }
+    production {
+      applicationId 'es.amarinag.mvvm_databinging_dagger2'
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+retrolambda {
+  jdk System.getenv("JAVA8_HOME")
+  oldJdk System.getenv("JAVA7_HOME")
+  javaVersion JavaVersion.VERSION_1_7
+  jvmArgs '-noverify'
+  defaultMethods false
+  incremental true
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  testCompile 'junit:junit:4.12'
   compile 'com.android.support:appcompat-v7:23.3.0'
+  compile 'com.android.support:recyclerview-v7:23.3.0'
+  provided 'org.glassfish:javax.annotation:10.0-b28'
+  compile 'com.google.dagger:dagger:2.2'
+  apt 'com.google.dagger:dagger-compiler:2.2'
+  testCompile 'junit:junit:4.12'
+  compile 'com.google.code.gson:gson:2.6.2'
+  compile 'com.squareup.okhttp3:okhttp:3.2.0'
+  compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+  compile 'com.facebook.stetho:stetho:1.3.1'
+  compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
+  compile 'com.squareup.retrofit2:retrofit:2.0.2'
+  compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+  compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+  compile 'io.reactivex:rxjava:1.1.3'
+  compile 'io.reactivex:rxandroid:1.1.0'
+  androidTestCompile 'com.android.support:support-annotations:23.3.0'
+  androidTestCompile 'com.android.support.test:runner:0.4.1'
+  androidTestCompile 'com.android.support.test:rules:0.4.1'
+  androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+  androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2') {
+    // Necessary to avoid version conflicts
+    exclude group: 'com.android.support', module: 'appcompat'
+    exclude group: 'com.android.support', module: 'support-v4'
+    exclude group: 'com.android.support', module: 'support-annotations'
+    exclude module: 'recyclerview-v7'
+  }
+  compile 'com.jakewharton.timber:timber:4.1.2'
+  retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.3.0'
 }
